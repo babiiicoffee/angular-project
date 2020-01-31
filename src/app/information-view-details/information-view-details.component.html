@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="card">
+        <div class="card-body" *ngFor="let data of userList">
+            <div class="card-title">
+                <h3>{{data.name}}</h3>
+            </div>
+            <hr>
+            <div>
+                <tbody mdbTable>
+                    <tr><b>ID :</b> {{data.id}}</tr>
+                    <br>
+                    <tr><b>Name :</b> {{data.name}}</tr>
+                    <br>
+                    <tr><b>Email :</b> {{data.email}}</tr>
+                    <br>
+                    <tr><b>Phone :</b> {{data.phone}}</tr>
+                    <tr>
+                        <button routerLink="/addInformation" mdbBtn type="button" color="success" rounded="true" mdbWavesEffect>Back</button>
+                    </tr>
+                </tbody>
+            </div>
+        </div>
+    </div>
+</div>

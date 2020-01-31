@@ -1,0 +1,94 @@
+<div class="container">
+
+    <form #sampleForm="ngForm">
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h3>Add Person's Informations</h3>
+                    </div>
+                    <hr>
+                    <div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Fullname</span>
+                            </div>
+                            <input name="fullName" type="text" class="form-control" placeholder="Fullname" aria-label="Fullname" required pattern="^[A-Za-z%+ +.-]{2,30}$" #fullname="ngModel" minlength="2" [(ngModel)]="fname">
+                        </div>
+                        <div *ngIf="fullname.invalid && (fullname.dirty || fullname.touched)" class="alert alert-danger">
+                            <div id="errors" *ngIf="fullname.errors.required">
+                                First name is required!
+                            </div>
+                            <div id="errors" *ngIf="fullname.errors.minlength">
+                                Fisrt name must be atleast 2 characters!
+                            </div>
+                        </div>
+                    </div>
+                    <!-- email -->
+                    <div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Email</span>
+                            </div>
+                            <input name="email" type="email" class="form-control" placeholder="Email" [(ngModel)]="email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$" required required-notification="Enter your email to send verification email" #emailAdd="ngModel">
+
+                        </div>
+                        <div *ngIf="emailAdd.invalid && (emailAdd.dirty || emailAdd.touched)" class="alert alert-danger">
+                            <div id="errors" *ngIf="emailAdd.errors.required">
+                                Email is required!
+                            </div>
+                            <div id="errors" *ngIf="emailAdd.errors.pattern">
+                                Email is invalid. It must be like <i>"example@gmail.com"</i>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Contact</span>
+                            </div>
+                            <input name="contact" type="text" class="form-control" placeholder="Contact" aria-label="Fullname" #contactInfo="ngModel" [(ngModel)]="phone" minlength="5" required>
+                        </div>
+                        <div *ngIf="contactInfo.invalid && (contactInfo.dirty || contactInfo.touched)" class="alert alert-danger">
+                            <div *ngIf="contactInfo.errors.required">
+                                Phone number is required!
+                            </div>
+                            <div *ngIf="contactInfo.errors.minlength">
+                                Phone number must be atleast 5 characters!
+                            </div>
+                        </div>
+                    </div>
+
+                    <button [disabled]="sampleForm.form.invalid" class="btn btn-success" (click)="onAddCreateData()">Add</button>
+                    <button class="btn btn-danger" (click)="sampleForm.reset()">Clear</button>
+                    <a routerLink="/registration">Go back to registration page</a>
+
+                    <!-- On add data -->
+                    <!-- <div *ngIf="addDataBtn">
+                        <button [disabled]="sampleForm.form.invalid" class="btn btn-success" (click)="onAddCreateData()">Add</button>
+                        <button class="btn btn-danger" (click)="sampleForm.reset()">Clear</button>
+                        <a routerLink="/registration">Go to add registration page</a>
+                    </div> -->
+
+                    <!-- On update data -->
+                    <!-- <div *ngIf="updateDataBtn">
+                        <button [disabled]="sampleForm.form.invalid" class="btn btn-success">Update</button>
+                        <button class="btn btn-danger " (click)="onCancel(sampleForm)">Cancel</button>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+<br>
+
+<hr>
+
+<div>
+    <!-- <app-information-view (toEditData)="updateData($event)" [parentDataList]="apiDataList"></app-information-view> -->
+    <app-information-view (toEditData)="updateData($event)" [parentDataList]="apiDataList"></app-information-view>
+</div>
+
+<button mdbBtn type="button" color="default" rounded="true" mdbWavesEffect routerLink="/">Go to home page</button>
+<button mdbBtn type="button" color="default" rounded="true" mdbWavesEffect routerLink="/pageNotFound">Go to error page</button>

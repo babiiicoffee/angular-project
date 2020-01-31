@@ -1,0 +1,45 @@
+<body>
+    <div class="conatiner">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">
+                    <h3>Data</h3>
+                </div>
+                <hr>
+                <div>
+                    <div>
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Fullname</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Contact</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <!-- <tr *ngFor="let info of informations; let i = index;">
+                                <td>{{i + 1}}</td> -->
+                                <tr *ngFor="let data of parentDataList">
+                                    <td>{{data.id}}</td>
+                                    <td>{{data.name}}</td>
+                                    <td>{{data.email}}</td>
+                                    <td>{{data.phone}}</td>
+                                    <td>
+                                        <!-- <button (click)="onDelete(data.id)">delete</button> -->
+                                        <!-- <button class="btn btn-primary" routerLink="/view/{{data.id}}">View</button> -->
+                                        <button mdbBtn type="button" color="info" rounded="true" mdbWavesEffect routerLink="/informationViewDetails/{{data.id}}">View</button>
+                                        <button class="btn btn-danger" (click)="onDelete(data)">delete</button>
+                                        <button class="btn btn-success" (click)="edit(data)">edit</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

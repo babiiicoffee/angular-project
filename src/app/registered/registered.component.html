@@ -1,0 +1,35 @@
+<div>
+    <div class="panel w3-card-4">
+        <div class="card-body">
+            <div class="card-title">
+                <h5> Registered Informations</h5>
+            </div>
+            <hr>
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Firstname</th>
+                        <th scope="col">Lastname</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Password</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let info of informations; let i = index;">
+                        <td>{{i + 1}}</td>
+                        <td>{{info.firstname}}</td>
+                        <td>{{info.lastname}}</td>
+                        <td>{{info.email}}</td>
+                        <td>{{info.password}}</td>
+                        <td>
+                            <button (click)="onEdit(info)" class="btn btn-default">Delete</button>
+                            <button (click)="onDelete(info)" class="btn btn-default">Edit</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

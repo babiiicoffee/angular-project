@@ -1,0 +1,109 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- For tooltip validation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+<script src="https://rawgit.com/angular-ui/bootstrap/gh-pages/ui-bootstrap-tpls-1.3.3.min.js"></script>
+<script src="https://cdn.rawgit.com/sagrawal14/bootstrap-angular-validation/v1.0.4/dist/bootstrap-angular-validation-all.min.js"></script>
+
+<div class="container">
+    <form (ngSubmit)="onSubmit(sampleForm)" #sampleForm="ngForm">
+        <div class="panel w3-card-4">
+            <div class="card-body">
+                <div class="card-title">
+                    <h5>Sign Up</h5>
+                </div>
+                <hr>
+                <div class="row">
+                    <!-- First Name -->
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="firstName" class="control-label">First Name</label>
+                            <input name="firstname" type="text" class="form-control" placeholder="First Name" [(ngModel)]="firstName" required pattern="^[A-Za-z%+ +-]{2,30}$" #fname="ngModel" minlength="2">
+
+                            <div id="errors" *ngIf="fname.invalid && (fname.dirty || fname.touched)" class="alert alert-danger">
+                                <div id="errors" *ngIf="fname.errors.required">
+                                    First name is required!
+                                </div>
+                                <div id="errors" *ngIf="fname.errors.minlength">
+                                    Fisrt name must be atleast 2 characters!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- <div *ngIf="fname.valid" class="alert alert-success">
+                        ok!
+                    </div> -->
+
+                    <!-- Last Name -->
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="lastName" class="control-label">Last Name</label>
+                            <input name="lastname" type="text" class="form-control" placeholder="Last Name" [(ngModel)]="lastName" required pattern="^[A-Za-z%+ +-]{2,30}$" #lname="ngModel" minlength="2">
+                            <div *ngIf="lname.invalid && (lname.dirty || lname.touched)" class="alert alert-danger">
+                                <div id="errors" *ngIf="lname.errors.required">
+                                    Last name is required!
+                                </div>
+                                <div id="errors" *ngIf="lname.errors.minlength">
+                                    Last name must be atleast 2 characters!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email" class="control-label">Email</label>
+                    <input name="email" type="email" class="form-control" placeholder="Email" [(ngModel)]="email" pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required required-notification="Enter your email to send verification email" #emailAdd="ngModel">
+
+                    <div *ngIf="emailAdd.invalid && (emailAdd.dirty || emailAdd.touched)" class="alert alert-danger">
+                        <div id="errors" *ngIf="emailAdd.errors.required">
+                            Email is required!
+                        </div>
+                        <div id="errors" *ngIf="emailAdd.errors.pattern">
+                            Email is invalid. It must be like <i>"example@gmail.com"</i>
+                        </div>
+                    </div>
+                </div>
+                <!-- Password -->
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="password" class="control-label">Password</label>
+
+                            <input name="password" type="password" class="form-control" placeholder="Password" [(ngModel)]="password" required="required" #pass="ngModel">
+                            <div *ngIf="pass.invalid && (pass.dirty || pass.touched)" class="alert alert-danger">
+                                <div id="errors" *ngIf="pass.errors">
+                                    Password is required!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sign Up Button -->
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <button [disabled]="sampleForm.form.invalid" type="submit" class="btn btn-default">Sign up</button>
+
+                    </div>
+                </div>
+                <!-- Add informatio -->
+                <!-- <div class="col-sm-6">
+                    <div class="form-group">
+                        <a routerLink="/addInformation">Go to add information</a>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </form>
+
+    <div *ngIf="show">
+        <app-registered (editEvent)="toEdit($event)" [informations]="registeredInformation"></app-registered>
+    </div>
+    <!--
+    <button mdbBtn type="button" color="default" rounded="true" mdbWavesEffect routerLink="/">Go to home page</button>
+    <button mdbBtn type="button" color="default" rounded="true" mdbWavesEffect routerLink="/pageNotFound">Go to error page</button> -->
